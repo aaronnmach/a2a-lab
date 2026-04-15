@@ -8,7 +8,10 @@ from client import A2AClient
 
 
 def main() -> None:
-    agent_url = os.getenv("A2A_AGENT_URL", "https://echo-a2a-agent-ijybv5o3zq-uc.a.run.app")
+    agent_url = os.getenv(
+        "A2A_AGENT_URL",
+        "https://echo-a2a-agent-ijybv5o3zq-uc.a.run.app",
+    )
 
     with A2AClient(agent_url) as client:
         card = client.fetch_agent_card()

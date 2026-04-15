@@ -18,7 +18,8 @@ REVERSE_AGENT_CARD: dict[str, Any] = {
         {
             "id": "reverse-words",
             "name": "Reverse Words",
-            "description": "Reverses the order of words in the user's message.",
+            "description": "Reverses the order of words in the "
+            "user's message.",
             "inputModes": ["text/plain"],
             "outputModes": ["text/plain"],
         }

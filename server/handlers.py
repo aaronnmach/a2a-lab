@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 MOCK_SUMMARY = (
-    "Mock summary: the input asks the agent to summarise text, so this placeholder "
+    "Mock summary: the input asks the agent to summarise text, "
+    "so this placeholder "
     "returns a single-sentence summary."
 )
 

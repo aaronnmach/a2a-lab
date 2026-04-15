@@ -70,12 +70,17 @@ class A2AClient:
         data = resp.json()
         state = data.get("status", {}).get("state")
         if state != "completed":
-            raise RuntimeError(f"Task {data.get('id', payload['id'])} returned unexpected state: {state!r}")
+            task_id = data.get("id", payload["id"])
+            raise RuntimeError(
+                f"Task {task_id} returned unexpected state: {state!r}"
+            )
         return data
 
     @staticmethod
     def extract_text(response: dict) -> str:
-        """Pull the first text part from artifacts, or file URL if the first part is a file."""
+        """Pull the first text part from artifacts, or file URL if the
+        first part is a file.
+        """
         artifacts = response.get("artifacts", [])
         for artifact in artifacts:
             for part in artifact.get("parts", []):

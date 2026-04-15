@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import sys
+import importlib
 import vertexai
 from vertexai.preview import reasoning_engines
 
@@ -18,7 +19,10 @@ SERVER_DIR = os.path.join(PROJECT_ROOT, "server")
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from agent.agent import EchoAgent
+# Dynamically import the agent module after ensuring the project root is on
+# sys.path. Using importlib avoids placing an import statement after executable
+# code, which flake8 flags (E402).
+EchoAgent = getattr(importlib.import_module("agent.agent"), "EchoAgent")
 
 vertexai.init(
     project=PROJECT_ID,

@@ -42,12 +42,25 @@ async def health() -> dict[str, str]:
 @app.post('/tasks/send')
 async def send_task(request: TaskRequest) -> dict[str, Any]:
     if not request.message.parts:
-        raise HTTPException(status_code=400, detail='message.parts must contain at least one part')
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "message.parts must contain at least one part"
+            ),
+        )
 
-    text = ' '.join(part.text for part in request.message.parts if part.type == 'text')
-    reversed_text = ' '.join(reversed(text.split()))
+    text = " ".join(
+        part.text for part in request.message.parts if part.type == "text"
+    )
+    reversed_text = " ".join(reversed(text.split()))
     return {
         "id": request.id,
         "status": {"state": "completed", "message": None},
-        "artifacts": [{"index": 0, "name": "result", "parts": [{"type": "text", "text": reversed_text}]}],
+        "artifacts": [
+            {
+                "index": 0,
+                "name": "result",
+                "parts": [{"type": "text", "text": reversed_text}],
+            }
+        ],
     }

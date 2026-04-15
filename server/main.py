@@ -63,7 +63,10 @@ async def health() -> dict[str, str]:
 @app.post("/tasks/send")
 async def send_task(request: TaskRequest) -> dict[str, Any]:
     if not request.message.parts:
-        raise HTTPException(status_code=400, detail="message.parts must contain at least one part")
+        raise HTTPException(
+            status_code=400,
+            detail="message.parts must contain at least one part",
+        )
 
     result_text = await handle_task(request)
 
